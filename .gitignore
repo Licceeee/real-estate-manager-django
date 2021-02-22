@@ -1,0 +1,12 @@
+*.log
+*.pot
+*.pyc
+__pycache__/
+production_settings.py
+.db.sqlite3-journal
+media
+.vscode
+db.sqlite3
+static
+**/migrations/*
+venv/
