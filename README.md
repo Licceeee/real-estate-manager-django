@@ -3,7 +3,7 @@ Real estate manager
 
 clone
 
-```git clone git@github.com:Licceeee/real-estate-django.git```
+```git clone git@github.com:Licceeee/real-estate-manager-django.git```
 
 change dir
 
