@@ -39,7 +39,15 @@ start
 
 ```python3 manage.py runserver```
 
+hit 
+localhost:port/admin to enter the admin panel with credentials created 
+with createsuperuser
+e.g
+```localhost:9000/admin```
+
+
+
 production settings
 
 rename project/project/production_settings.example.py to production_settings.py
-replace your credentials
+replace placeholders with your credentials
