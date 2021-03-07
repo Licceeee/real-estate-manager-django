@@ -8,5 +8,5 @@ media
 .vscode
 db.sqlite3
 static
-# **/migrations/*
+**/migrations/*
 venv/
