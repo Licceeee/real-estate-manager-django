@@ -47,7 +47,7 @@ with createsuperuser
 e.g
 ```localhost:9000/admin```
 
-
+----
 
 production settings
 
