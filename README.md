@@ -21,6 +21,21 @@ install dependencies
 
 ```pip install -r req.txt```
 
+migrate db
 
+```python3 manage.py makemigrations```
+```python3 manage.py migrate```
+
+go to project/settings.py and comment out:
+```
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'project/static')
+]
+```
+Comment back in in production mode!
+
+apply static files
+
+```python3 manage.py collectstatic```
 
  ... IN PROGRESS ...

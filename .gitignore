@@ -7,6 +7,6 @@ production_settings.py
 media
 .vscode
 db.sqlite3
-static
-**/migrations/*
+static/
+# **/migrations/*
 venv/
