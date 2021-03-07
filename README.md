@@ -52,4 +52,5 @@ e.g with standard port
 production settings
 
 rename project/project/production_settings.example.py to production_settings.py
+
 replace placeholders with your credentials
