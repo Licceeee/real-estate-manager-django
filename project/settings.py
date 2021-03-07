@@ -301,6 +301,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
+SITE_ID = 1
 
 try:
     from .production_settings import *

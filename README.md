@@ -26,16 +26,20 @@ migrate db
 ```python3 manage.py makemigrations```
 ```python3 manage.py migrate```
 
-go to project/settings.py and comment out:
-```
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'project/static')
-]
-```
-Comment back in in production mode!
 
 apply static files
 
 ```python3 manage.py collectstatic```
 
- ... IN PROGRESS ...
+create superuser
+
+```python3 manage.py createsuperuser```
+
+start
+
+```python3 manage.py runserver```
+
+production settings
+
+rename project/project/production_settings.example.py to production_settings.py
+replace your credentials

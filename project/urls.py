@@ -15,11 +15,9 @@ handler500 = 'core.views.server_error'
 
 urlpatterns = i18n_patterns(
     path('i18n/', include('django_translation_flags.urls')),
+    path('admin/', admin.site.urls),
+    path('admin/contact/', AdminContactView.as_view(), name='admin-contact'),
 
-    path('unicorn/contact/',
-         AdminContactView.as_view(), name='admin-contact'),
-
-    path('unicorn/', admin.site.urls),
     path('', include('core.urls')),
     path('auth/', include('django.contrib.auth.urls')),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(
