@@ -24,6 +24,7 @@ install dependencies
 migrate db
 
 ```python3 manage.py makemigrations```
+
 ```python3 manage.py migrate```
 
 
@@ -42,6 +43,7 @@ start
 hit 
 localhost:port/admin to enter the admin panel with credentials created 
 with createsuperuser
+
 e.g
 ```localhost:9000/admin```
 
