@@ -7,7 +7,7 @@ clone
 
 change dir
 
-```cd real-estate-django```
+```cd real-estate-manager-django```
 
 create venv
 
