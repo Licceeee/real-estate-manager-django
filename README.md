@@ -44,8 +44,8 @@ hit
 localhost:port/admin to enter the admin panel with credentials created 
 with createsuperuser
 
-e.g
-```localhost:9000/admin```
+e.g with standard port
+```localhost:8000/admin```
 
 ----
 
