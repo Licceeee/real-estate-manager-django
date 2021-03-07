@@ -1,4 +1,4 @@
-# real-estate-django
+# real-estate-manager-django
 Real estate manager
 
 clone
