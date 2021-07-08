@@ -3,7 +3,7 @@ Real estate manager
 
 clone & cd
 
-```git clone https://github.com/Licceeee/real-estate-manager-django.git && cd real-estate-manager-django````
+```git clone https://github.com/Licceeee/real-estate-manager-django.git && cd real-estate-manager-django```
 
 create venv
 
