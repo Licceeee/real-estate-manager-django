@@ -1,6 +1,6 @@
 from django import forms
 from .models import CustomUser
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class BasicFormStyle(forms.ModelForm):
@@ -14,29 +14,44 @@ class BasicFormStyle(forms.ModelForm):
 
 class ProfileUpdateForm(BasicFormStyle):
 
-    class Meta():
+    class Meta:
         model = CustomUser
         fields = ['first_name', 'last_name', 'email', 'phone', 'last_login']
         widgets = {
-            'first_name': forms.TextInput(attrs={'placeholder': _("Firstname"),
-                                                 'name': 'first_name',
-                                                 'type': 'text',
-                                                 'aria-required': 'true',
-                                                 'minlength': '2'}),
-            'last_name': forms.TextInput(attrs={'placeholder': _("Lastname"),
-                                                'name': 'last_name',
-                                                'type': 'text',
-                                                'aria-required': 'true',
-                                                'minlength': '2'}),
-            'email': forms.TextInput(attrs={'placeholder': _("Email"),
-                                            'name': 'email',
-                                            'type': 'email',
-                                            'aria-required': 'true',
-                                            'minlength': '2'}),
-            'phone': forms.TextInput(attrs={'placeholder': _("Phone"),
-                                            'name': 'phone',
-                                            'type': 'phone',
-                                            'aria-required': 'true',
-                                            'minlength': '2'}),
-
+            'first_name': forms.TextInput(
+                attrs={
+                    'placeholder': _("Firstname"),
+                    'name': 'first_name',
+                    'type': 'text',
+                    'aria-required': 'true',
+                    'minlength': '2',
+                }
+            ),
+            'last_name': forms.TextInput(
+                attrs={
+                    'placeholder': _("Lastname"),
+                    'name': 'last_name',
+                    'type': 'text',
+                    'aria-required': 'true',
+                    'minlength': '2',
+                }
+            ),
+            'email': forms.TextInput(
+                attrs={
+                    'placeholder': _("Email"),
+                    'name': 'email',
+                    'type': 'email',
+                    'aria-required': 'true',
+                    'minlength': '2',
+                }
+            ),
+            'phone': forms.TextInput(
+                attrs={
+                    'placeholder': _("Phone"),
+                    'name': 'phone',
+                    'type': 'phone',
+                    'aria-required': 'true',
+                    'minlength': '2',
+                }
+            ),
         }

@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
-from django.views.generic import (TemplateView)
-from django.utils.translation import ugettext_lazy as _
+from django.views.generic import TemplateView
+from django.utils.translation import gettext_lazy as _
 
 from core.models import State
 from listings.models import Listing, ListingType
@@ -31,18 +30,22 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['listings'] = Listing.objects.order_by('-created').filter(
-                               is_published=True)[:3]
+            is_published=True
+        )[:3]
         context['states'] = State.objects.all()
         context['list_types'] = ListingType.objects.all()
         context['index'] = True
         # SEO
-        context['page_title'] = _("Real estate manager."
-                                  " Renting, buying and selling.")
-        context['page_description'] = _("Real estate manager. We offer"
-                                        " real estate objects and takes care"
-                                        " of every aspect for you. Services"
-                                        " offered: renting, selling, buying,"
-                                        " consultation and way more.")
+        context['page_title'] = _(
+            "Real estate manager." " Renting, buying and selling."
+        )
+        context['page_description'] = _(
+            "Real estate manager. We offer"
+            " real estate objects and takes care"
+            " of every aspect for you. Services"
+            " offered: renting, selling, buying,"
+            " consultation and way more."
+        )
         return context
 
 
@@ -57,10 +60,12 @@ class AboutView(TemplateView):
         context['subtitle'] = _("Real Estate and Consulting")
         # SEO
         context['page_title'] = _("About Us")
-        context['page_description'] = _("Real estate manager."
-                                        "Our services include "
-                                        "renting, selling, buying, consulting "
-                                        "and much more.")
+        context['page_description'] = _(
+            "Real estate manager."
+            "Our services include "
+            "renting, selling, buying, consulting "
+            "and much more."
+        )
         return context
 
 
@@ -74,8 +79,9 @@ class PrivacyView(TemplateView):
         context['subtitle'] = _("Real-Estate")
         # SEO
         context['page_title'] = _("Privacy")
-        context['page_description'] = _("Real estate manager."
-                                        "This is our privacy page.")
+        context['page_description'] = _(
+            "Real estate manager." "This is our privacy page."
+        )
         return context
 
 
@@ -89,8 +95,9 @@ class ImpressumView(TemplateView):
         context['subtitle'] = _("Real-Estate")
         # SEO
         context['page_title'] = _("Impressum")
-        context['page_description'] = _("Real estate manager."
-                                        "This is our impressum page.")
+        context['page_description'] = _(
+            "Real estate manager." "This is our impressum page."
+        )
         return context
 
 

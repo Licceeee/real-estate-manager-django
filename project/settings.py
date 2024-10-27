@@ -20,11 +20,10 @@ DEFAULT_LOGGING_LEVEL = "DEBUG" if DEBUG else "INFO"
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(name)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
+            '%(process)d %(thread)d %(message)s'
         },
         'simple': {
             "datefmt": "%Y-%m-%d %H:%M:%S %z",
@@ -36,7 +35,6 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse',
         }
     },
-
     'handlers': {
         'null': {
             'level': 'DEBUG',
@@ -52,14 +50,14 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
             'formatter': 'verbose',
-            'include_html': True
+            'include_html': True,
         },
         'warn_admins': {
             'level': 'WARN',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
             'formatter': 'verbose',
-            'include_html': True
+            'include_html': True,
         },
     },
     'loggers': {
@@ -68,16 +66,17 @@ LOGGING = {
         # ----------------------------------------
         # make sure we have anything >= WARN whatsoever
         'root': {
-            'handlers':  ["console"],
+            'handlers': ["console"],
             'level': "WARN",
             'formatter': "verbose",
         },
-
         # ----------------------------------------
         # apps loggers - django (default)
         # ----------------------------------------
         'django': {
-            'handlers':  ["console", ],
+            'handlers': [
+                "console",
+            ],
             'level': "INFO",
             'formatter': "verbose",
             'propagate': True,
@@ -87,7 +86,6 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-
         # ----------------------------------------
         # app loggers - third part
         # ----------------------------------------
@@ -96,37 +94,45 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
-
         # ----------------------------------------
         # app loggers - our own apps
         # ----------------------------------------
         'accounts': {
-            'handlers':  ["console", ],
+            'handlers': [
+                "console",
+            ],
             'level': DEFAULT_LOGGING_LEVEL,
             'propagate': True,
         },
         'contacts': {
-            'handlers':  ["console", ],
+            'handlers': [
+                "console",
+            ],
             'level': DEFAULT_LOGGING_LEVEL,
             'propagate': True,
         },
         'core': {
-            'handlers':  ["console", ],
+            'handlers': [
+                "console",
+            ],
             'level': DEFAULT_LOGGING_LEVEL,
             'propagate': True,
         },
         'documents': {
-            'handlers':  ["console", ],
+            'handlers': [
+                "console",
+            ],
             'level': DEFAULT_LOGGING_LEVEL,
             'propagate': True,
         },
         'listings': {
-            'handlers':  ["console", ],
+            'handlers': [
+                "console",
+            ],
             'level': DEFAULT_LOGGING_LEVEL,
             'propagate': True,
         },
-
-    }
+    },
 }
 
 
@@ -156,7 +162,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',  # for google auth
-
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -169,14 +174,13 @@ OCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
-        }
+        },
     }
 }
 
 AUTHENTICATION_BACKENDS = (
     # used for default signin such as loggin into admin panel
     'django.contrib.auth.backends.ModelBackend',
-
     # used for social authentications
     'allauth.account.auth_backends.AuthenticationBackend',
 )
@@ -192,7 +196,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'crum.CurrentRequestUserMiddleware'
+    'allauth.account.middleware.AccountMiddleware',
+    'crum.CurrentRequestUserMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -209,7 +214,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processor.global_variables',
-
             ],
         },
     },
@@ -251,7 +255,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-def gettext(s): return s
+
+def gettext(s):
+    return s
 
 
 """
@@ -288,7 +294,7 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-   BASE_DIR / 'project/static',
+    BASE_DIR / 'project/static',
 ]
 
 print(BASE_DIR / 'project/static')
@@ -297,13 +303,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # Messages
-MESSAGE_TAGS = {
-    messages.ERROR: 'danger'
-}
+MESSAGE_TAGS = {messages.ERROR: 'danger'}
 
 SITE_ID = 1
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 try:
-    from .production_settings import *
+    from .production_settings import *  # noqa
 except ImportError:
     pass

@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
-from django.views.generic import (UpdateView, TemplateView)
+from django.views.generic import UpdateView, TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
+
 # from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
@@ -28,8 +29,9 @@ def register(request):
     context = {
         'title': _("Register"),
         'page_title': _("Register Account"),
-        'page_description': _("Real estate manager. "
-                              "This is the regitration page."),
+        'page_description': _(
+            "Real estate manager. " "This is the regitration page."
+        ),
     }
 
     if request.method == 'POST':
@@ -49,11 +51,16 @@ def register(request):
             else:
                 # if everything looks good
                 user = User.objects.create_user(
-                    password=password, email=email, is_active=True,
-                    first_name=first_name, last_name=last_name)
+                    password=password,
+                    email=email,
+                    is_active=True,
+                    first_name=first_name,
+                    last_name=last_name,
+                )
                 user.save()
                 messages.success(
-                    request, _("You are now registered and can log in"))
+                    request, _("You are now registered and can log in")
+                )
                 return redirect('login')
         else:
             messages.error(request, _("Passwords do not match"))
@@ -102,7 +109,9 @@ def password_reset_request(request):
             if associated_users.exists():
                 for user in associated_users:
                     subject = "Password Reset Requested"
-                    email_template_name = "accounts/auth/password_reset_email.txt"  # noqa
+                    email_template_name = (
+                        "accounts/auth/password_reset_email.txt"  # noqa
+                    )
                     c = {
                         "email": user.email,
                         'domain': 'real.lex.tornode.org',
@@ -114,8 +123,13 @@ def password_reset_request(request):
                     }
                     email = render_to_string(email_template_name, c)
                     try:
-                        send_mail(subject, email, 'schonefeld.dev@gmail.com',
-                                  [user.email], fail_silently=False)
+                        send_mail(
+                            subject,
+                            email,
+                            'schonefeld.dev@gmail.com',
+                            [user.email],
+                            fail_silently=False,
+                        )
                     except BadHeaderError:
                         return HttpResponse('Invalid header found.')
                     return redirect("password-reset-done")
@@ -124,11 +138,15 @@ def password_reset_request(request):
         'password_reset_form': PasswordResetForm(),
         'title': _("Reset Password"),
         'page_title': _("Password reset request"),
-        'page_description': _("Real estate manager. "
-                              "This is the password reset request page."),
+        'page_description': _(
+            "Real estate manager. " "This is the password reset request page."
+        ),
     }
-    return render(request=request, context=context,
-                  template_name="accounts/auth/password_reset.html")
+    return render(
+        request=request,
+        context=context,
+        template_name="accounts/auth/password_reset.html",
+    )
 
 
 class ProfileUpdateView(SuccessMessageMixin, UpdateView):
@@ -146,8 +164,9 @@ class ProfileUpdateView(SuccessMessageMixin, UpdateView):
         context['subtitle'] = _("Manage your Real-Estate account")
         # SEO
         context['page_title'] = _("Impressum")
-        context['page_description'] = _("Real estate manager."
-                                        "This is our impressum page.")
+        context['page_description'] = _(
+            "Real estate manager." "This is our impressum page."
+        )
 
         return context
 
@@ -164,9 +183,8 @@ class AddressView(TemplateView):
 # TODO convert to class based view
 def dashboard(request):
     user_contacts = Contact.objects.order_by('-contact_date').filter(
-        user_id=request.user.id)
+        user_id=request.user.id
+    )
 
-    context = {
-        'contacts': user_contacts
-    }
+    context = {'contacts': user_contacts}
     return render(request, 'accounts/dashboard.html', context)
